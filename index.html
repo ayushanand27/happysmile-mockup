@@ -1,96 +1,173 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HappySmile – AI first-call mockups (2 screens)</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>body{margin:0;font-family:Inter,sans-serif;background:#E3EEEB;color:#12312C}
-h1{font-size:20px;margin:0}header{padding:24px 28px 0}p.s{margin:6px 0 0;font-size:14px;color:#3C5A54}
-.wrap{display:flex;flex-wrap:wrap;gap:32px;padding:24px 28px 48px;align-items:flex-start}
-figure{margin:0}figcaption{font-weight:700;font-size:14px;margin-bottom:10px}
-.frame{box-shadow:0 6px 24px rgba(0,0,0,.12);border-radius:14px;overflow:hidden}</style></head><body>
-<header><h1>HappySmile: AI first call for web enquiries</h1><p class="s">Fictional case mockup. Screen 1: the moment a person asks to be contacted. Screen 2: what HappySmile sees afterwards.</p></header>
-<div class="wrap">
-<figure><figcaption>1 · Patient asks to be contacted</figcaption><div class="frame"><div style="width:390px;height:844px;box-sizing:border-box;background:#F4FAF8;color:#12312C;font-family:Inter,sans-serif;display:flex;flex-direction:column;padding:28px 22px;gap:18px">
-<div style="display:flex;align-items:center;gap:10px">
-<div style="width:34px;height:34px;border-radius:10px;background:#0E7C6B"></div>
-<div style="font-weight:700;font-size:18px">HappySmile</div>
+<title>HappySmile – AI first call: 2 clickable screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--t:#0E7C6B;--td:#0A5A4D;--tl:#DDF1EC;--ink:#12312C;--mut:#3C5A54;--bd:#D5E5E1;--bg:#F4FAF8;--red:#8E3220;--redl:#FBE8E3}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,sans-serif;background:#E3EEEB;color:var(--ink)}
+button,input{font-family:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid #1B6FD6;outline-offset:2px}
+header{padding:22px 24px 0;max-width:1280px;margin:0 auto}
+h1{font-size:22px;margin:0}
+.sub{margin:6px 0 0;font-size:14px;color:var(--mut);line-height:1.5;max-width:760px}
+.tabs{display:flex;gap:8px;margin:18px 0 0;flex-wrap:wrap}
+.tab{height:46px;padding:0 18px;border-radius:12px;border:1.5px solid #B9D3CD;background:#fff;color:var(--ink);font-weight:600;font-size:14px}
+.tab[aria-selected=true]{background:var(--t);border-color:var(--t);color:#fff}
+.hint{font-size:12.5px;color:var(--mut);margin:10px 0 0}
+main{max-width:1280px;margin:0 auto;padding:18px 24px 56px}
+.stage{display:none}.stage.on{display:block}
+/* phone */
+.phonewrap{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.phone{width:390px;min-height:844px;background:var(--bg);border-radius:30px;box-shadow:0 10px 40px rgba(0,0,0,.18);padding:28px 22px;display:flex;flex-direction:column;gap:16px;border:8px solid #16302B}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--t);display:grid;place-items:center;color:#fff;font-size:18px}
+.phone h2{margin:0;font-size:28px;line-height:1.15;font-weight:800;letter-spacing:-.01em}
+.phone p{margin:0;font-size:15px;line-height:1.45;color:var(--mut)}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
+.in{height:48px;border:1.5px solid #B9D3CD;border-radius:12px;padding:0 14px;font-size:16px;background:#fff;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:44px;padding:0 16px;border-radius:22px;border:1.5px solid #B9D3CD;background:#fff;color:var(--ink);font-size:14px}
+.chip[aria-pressed=true]{border-color:var(--t);background:var(--tl);color:var(--td);font-weight:700}
+.btn{height:54px;border-radius:14px;border:2px solid var(--t);font-size:17px;font-weight:700;width:100%}
+.p{background:var(--t);color:#fff}.s{background:#fff;color:var(--td)}
+.note{font-size:12.5px;line-height:1.5;color:var(--mut);background:#E6F1EE;border-radius:12px;padding:12px 14px}
+.err{color:var(--red);font-size:12.5px;min-height:16px;margin:-6px 0 0}
+.steps{display:flex;flex-direction:column;gap:12px}
+.step{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.4;opacity:.45;transition:opacity .4s}
+.step.done,.step.now{opacity:1}
+.dot{flex:none;width:26px;height:26px;border-radius:13px;background:#B9D3CD;color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center}
+.step.done .dot{background:var(--t)}.step.now .dot{background:#E8A33D}
+.big{font-size:44px;font-weight:800;letter-spacing:-.02em;color:var(--td);font-variant-numeric:tabular-nums}
+.wa{background:#E6DDD4;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.bub{background:#fff;border-radius:4px 14px 14px 14px;padding:10px 12px;font-size:14px;line-height:1.45;max-width:92%;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bub small{display:block;color:#6b7a77;font-size:11px;margin-top:4px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}.opt{height:40px;padding:0 14px;border-radius:20px;border:1.5px solid var(--t);background:#fff;color:var(--td);font-weight:600;font-size:13px}
+.link{background:none;border:none;color:var(--td);font-weight:600;text-decoration:underline;font-size:14px;padding:10px 0;align-self:flex-start}
+.side{max-width:300px;font-size:13.5px;line-height:1.55;color:var(--mut)}
+.side b{color:var(--ink)}
+/* desk */
+.deskscale{overflow-x:auto}
+.desk{width:1200px;min-height:780px;background:var(--bg);border:1px solid var(--bd);border-radius:18px;box-shadow:0 10px 40px rgba(0,0,0,.12);overflow:hidden;margin:0 auto}
+.top{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:#fff;border-bottom:1px solid var(--bd)}
+.kpis{display:flex;gap:14px;padding:16px 24px 0}
+.kpi{flex:1;background:#fff;border:1px solid var(--bd);border-radius:14px;padding:12px 16px}
+.kpi .l{font-size:12px;color:var(--mut)}.kpi .v{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+.body{display:flex;gap:16px;padding:16px 24px 24px}
+.list{width:370px;background:#fff;border:1px solid var(--bd);border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:4px;align-self:flex-start}
+.lead{text-align:left;border:1.5px solid #E1ECE9;background:#fff;border-radius:12px;padding:12px;color:var(--ink);display:flex;flex-direction:column;gap:4px;width:100%}
+.lead[aria-selected=true]{border-color:var(--t);background:#EAF6F3}
+.lead .r{display:flex;justify-content:space-between;font-weight:700;font-size:15px;gap:8px}
+.lead .m{font-size:13px;color:var(--mut)}
+.tag{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.hot{color:var(--red)}.ok{color:var(--td)}.gr{color:var(--mut)}
+.card{flex:1;background:#fff;border:1px solid var(--bd);border-radius:14px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;min-height:560px}
+.sum{background:#F1F8F6;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.5}
+.sum h4{margin:0;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.b2{height:52px;padding:0 22px;border-radius:12px;font-size:15px;font-weight:700;border:2px solid var(--t);background:#fff;color:var(--td)}
+.b2.p{background:var(--t);color:#fff}
+.b2.d{border-color:#B4472F;color:var(--red);font-weight:600}
+.status{font-size:14px;font-weight:600;border-radius:12px;padding:12px 14px}
+.status.info{background:#E6F1EE;color:var(--td)}.status.warn{background:var(--redl);color:var(--red)}
+.pause{height:44px;padding:0 16px;border-radius:10px;border:1.5px solid #B4472F;background:#fff;color:var(--red);font-weight:600;font-size:14px}
+.pause[aria-pressed=true]{background:var(--red);color:#fff}
+.tx{font-size:13px;line-height:1.6;color:var(--mut);border-left:3px solid #B9D3CD;padding-left:12px}
+.tx b{color:var(--ink)}
+.banner{margin:12px 24px 0;background:var(--redl);color:var(--red);border-radius:12px;padding:12px 16px;font-weight:600;font-size:14px}
+.foot{margin-top:auto;font-size:12.5px;color:var(--mut)}
+@media(max-width:700px){.phone{width:100%;border-width:6px}.phonewrap{gap:20px}}
+</style></head><body>
+<header>
+<h1>HappySmile: AI first call for web enquiries</h1>
+<p class="sub">A fictional case mockup. Two clickable screens: the moment a person asks to be contacted, and what HappySmile sees afterwards.</p>
+<div class="tabs" role="tablist" aria-label="Screens">
+<button class="tab" role="tab" id="t1" aria-selected="true" aria-controls="s1">1 · Patient asks to be contacted</button>
+<button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="s2">2 · What HappySmile sees afterwards</button>
 </div>
-<div style="display:flex;flex-direction:column;gap:8px">
-<h1 style="margin:0;font-size:28px;line-height:1.2;font-weight:700">Hear back in 2 minutes, not 4 hours.</h1>
-<p style="margin:0;font-size:15px;line-height:1.45;color:#3C5A54">Tell us what you need. Pick how you want us to reach you.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:12px">
-<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Your name
-<input type="text" value="Priya" style="height:46px;border:1px solid #B9D3CD;border-radius:12px;padding:0 14px;font-size:16px;background:#fff;color:#12312C;font-family:Inter,sans-serif">
-</label>
-<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Mobile number
-<input type="text" value="+91 98XXX XXXXX" style="height:46px;border:1px solid #B9D3CD;border-radius:12px;padding:0 14px;font-size:16px;background:#fff;color:#12312C;font-family:Inter,sans-serif">
-</label>
-<div style="display:flex;flex-direction:column;gap:6px">
-<div style="font-size:13px;font-weight:600">What are you looking for?</div>
-<div style="display:flex;flex-wrap:wrap;gap:8px">
-<button style="height:44px;padding:0 16px;border-radius:22px;border:2px solid #0E7C6B;background:#DDF1EC;color:#0A5A4D;font-weight:600;font-size:14px;font-family:Inter,sans-serif">Braces</button>
-<button style="height:44px;padding:0 16px;border-radius:22px;border:1px solid #B9D3CD;background:#fff;color:#12312C;font-size:14px;font-family:Inter,sans-serif">Whitening</button>
-<button style="height:44px;padding:0 16px;border-radius:22px;border:1px solid #B9D3CD;background:#fff;color:#12312C;font-size:14px;font-family:Inter,sans-serif">Implants</button>
-<button style="height:44px;padding:0 16px;border-radius:22px;border:1px solid #B9D3CD;background:#fff;color:#12312C;font-size:14px;font-family:Inter,sans-serif">Not sure</button>
+<p class="hint">Everything is clickable. Try "Call me" on screen 1, then open screen 2.</p>
+</header>
+<main>
+<section class="stage on" id="s1" role="tabpanel" aria-labelledby="t1">
+<div class="phonewrap">
+<div class="phone" id="phone"></div>
+<div class="side">
+<p><b>Design choices on this screen</b></p>
+<p><b>Two buttons, two consents.</b> Tapping "Call me" allows a call; "WhatsApp me" allows WhatsApp. Nothing else.</p>
+<p><b>AI is named up front</b> on the form and again at the start of the call. Never passes as human.</p>
+<p><b>Promise is small and testable:</b> a call within 2 minutes, 9am to 8pm. Outside hours, the first call happens next morning.</p>
+<p><b>One missed call, then one WhatsApp, then stop.</b></p>
 </div>
 </div>
-</div>
-<div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
-<button style="height:54px;border-radius:14px;border:none;background:#0E7C6B;color:#fff;font-size:17px;font-weight:700;font-family:Inter,sans-serif">Call me</button>
-<button style="height:54px;border-radius:14px;border:2px solid #0E7C6B;background:#fff;color:#0A5A4D;font-size:17px;font-weight:700;font-family:Inter,sans-serif">WhatsApp me</button>
-</div>
-<div style="font-size:12.5px;line-height:1.5;color:#3C5A54;background:#E6F1EE;border-radius:12px;padding:12px 14px">
-Each button is permission for that channel only. The first call comes from HappySmile's <b>AI assistant</b>, and it will say so. A person takes over whenever you ask. Reply STOP to opt out.
-</div>
-<div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#12312C;margin-top:auto">
-<div style="font-weight:700">What happens next</div>
-<div style="display:flex;gap:10px;align-items:center"><span style="width:22px;height:22px;border-radius:11px;background:#0E7C6B;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span>A WhatsApp note from HappySmile, right now</div>
-<div style="display:flex;gap:10px;align-items:center"><span style="width:22px;height:22px;border-radius:11px;background:#0E7C6B;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">2</span>A call within 2 minutes (9am to 8pm)</div>
-<div style="display:flex;gap:10px;align-items:center"><span style="width:22px;height:22px;border-radius:11px;background:#0E7C6B;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span>Book a visit, or a clinic team member takes over</div>
-</div>
-</div></div></figure>
-<figure><figcaption>2 · What HappySmile sees afterwards</figcaption><div class="frame" style="overflow-x:auto"><div style="width:1200px;height:780px;box-sizing:border-box;background:#F4FAF8;color:#12312C;font-family:Inter,sans-serif;display:flex;flex-direction:column">
-<div style="height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:#fff;border-bottom:1px solid #D5E5E1">
-<div style="display:flex;align-items:center;gap:12px"><div style="width:30px;height:30px;border-radius:9px;background:#0E7C6B"></div><div style="font-weight:700;font-size:17px">HappySmile · Front desk</div><div style="font-size:13px;color:#3C5A54">Clinic: Jaipur</div></div>
-<div style="display:flex;align-items:center;gap:14px">
-<div style="font-size:13px;color:#3C5A54">AI assistant: <b style="color:#0A5A4D">On</b></div>
-<button style="height:44px;padding:0 18px;border-radius:10px;border:1.5px solid #B4472F;background:#fff;color:#8E3220;font-weight:600;font-size:14px;font-family:Inter,sans-serif">Pause AI for this clinic</button>
-</div>
-</div>
-<div style="display:flex;gap:16px;padding:18px 28px 0 28px">
-<div style="flex:1;background:#fff;border:1px solid #D5E5E1;border-radius:14px;padding:14px 18px"><div style="font-size:12px;color:#3C5A54">Hot leads waiting</div><div style="font-size:26px;font-weight:700">2</div></div>
-<div style="flex:1;background:#fff;border:1px solid #D5E5E1;border-radius:14px;padding:14px 18px"><div style="font-size:12px;color:#3C5A54">Accept within</div><div style="font-size:26px;font-weight:700">5 min</div></div>
-<div style="flex:2;background:#fff;border:1px solid #D5E5E1;border-radius:14px;padding:14px 18px"><div style="font-size:12px;color:#3C5A54">If nobody accepts in 5 min</div><div style="font-size:15px;font-weight:600;margin-top:6px">The patient automatically gets a WhatsApp link to book a slot herself.</div></div>
-<div style="flex:1;background:#fff;border:1px solid #D5E5E1;border-radius:14px;padding:14px 18px"><div style="font-size:12px;color:#3C5A54">Booked by you this week</div><div style="font-size:26px;font-weight:700">14</div></div>
-</div>
-<div style="display:flex;gap:16px;padding:16px 28px 28px 28px;flex:1;min-height:0">
-<div style="width:380px;background:#fff;border:1px solid #D5E5E1;border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:4px">
-<div style="padding:10px 12px;font-size:13px;font-weight:700;color:#3C5A54">Today's enquiries</div>
-<button style="text-align:left;border:2px solid #0E7C6B;background:#EAF6F3;border-radius:12px;padding:12px;font-family:Inter,sans-serif;color:#12312C;display:flex;flex-direction:column;gap:4px"><span style="display:flex;justify-content:space-between;font-weight:700;font-size:15px"><span>Priya · Braces</span><span style="color:#8E3220;font-size:13px">Accept in 3:48</span></span><span style="font-size:13px;color:#3C5A54">Hot · AI call finished 1 min ago</span></button>
-<button style="text-align:left;border:1px solid #E1ECE9;background:#fff;border-radius:12px;padding:12px;font-family:Inter,sans-serif;color:#12312C;display:flex;flex-direction:column;gap:4px"><span style="display:flex;justify-content:space-between;font-weight:700;font-size:15px"><span>Rohit · Implants</span><span style="color:#8E3220;font-size:13px">Accept in 4:30</span></span><span style="font-size:13px;color:#3C5A54">Hot · wants a visit this week</span></button>
-<button style="text-align:left;border:1px solid #E1ECE9;background:#fff;border-radius:12px;padding:12px;font-family:Inter,sans-serif;color:#12312C;display:flex;flex-direction:column;gap:4px"><span style="display:flex;justify-content:space-between;font-weight:700;font-size:15px"><span>Neha · Whitening</span><span style="color:#0A5A4D;font-size:13px">Booked Thu 6pm</span></span><span style="font-size:13px;color:#3C5A54">AI booked, no action needed</span></button>
-<button style="text-align:left;border:1px solid #E1ECE9;background:#fff;border-radius:12px;padding:12px;font-family:Inter,sans-serif;color:#12312C;display:flex;flex-direction:column;gap:4px"><span style="display:flex;justify-content:space-between;font-weight:700;font-size:15px"><span>Imran · Not sure</span><span style="color:#3C5A54;font-size:13px">Missed</span></span><span style="font-size:13px;color:#3C5A54">One WhatsApp sent, no more retries</span></button>
-</div>
-<div style="flex:1;background:#fff;border:1px solid #D5E5E1;border-radius:14px;padding:22px 26px;display:flex;flex-direction:column;gap:14px">
-<div style="display:flex;justify-content:space-between;align-items:flex-start">
-<div><div style="font-size:22px;font-weight:700">Priya · Braces</div><div style="font-size:13px;color:#3C5A54;margin-top:4px">Call 2:41 · AI said it was an AI · consented to Call</div></div>
-<div style="font-size:12px;font-weight:700;color:#8E3220;background:#FBE8E3;border-radius:999px;padding:6px 12px">HOT</div>
-</div>
-<div style="background:#F1F8F6;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.5">
-<div style="font-weight:700;font-size:13px;color:#3C5A54">Summary card</div>
-<div><b>Wants:</b> braces for herself, thinking of starting this month.</div>
-<div><b>Worried about:</b> total cost and treatment time.</div>
-<div><b>Free:</b> Thursday or Friday evening.</div>
-<div><b>Quoted:</b> "Starting from [clinic-approved price]", final cost after the consultation.</div>
-<div><b>AI did not:</b> give clinical advice or promise a result.</div>
-</div>
-<div style="display:flex;gap:12px;margin-top:4px">
-<button style="height:52px;padding:0 26px;border-radius:12px;border:none;background:#0E7C6B;color:#fff;font-size:16px;font-weight:700;font-family:Inter,sans-serif">Take over · call Priya</button>
-<button style="height:52px;padding:0 22px;border-radius:12px;border:2px solid #0E7C6B;background:#fff;color:#0A5A4D;font-size:15px;font-weight:700;font-family:Inter,sans-serif">Book Thu 6pm</button>
-<button style="height:52px;padding:0 22px;border-radius:12px;border:1.5px solid #B4472F;background:#fff;color:#8E3220;font-size:15px;font-weight:600;font-family:Inter,sans-serif">Pause AI for Priya</button>
-</div>
-<div style="font-size:12.5px;color:#3C5A54;margin-top:auto">Every booking you close is credited to you. The AI only makes the first call; the consultation is always with your team.</div>
-</div>
-</div>
-</div></div></figure>
-</div></body></html>
+</section>
+<section class="stage" id="s2" role="tabpanel" aria-labelledby="t2">
+<div class="deskscale"><div class="desk" id="desk"></div></div>
+</section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const state={name:'Priya',phone:'+91 98765 43210',tr:'Braces',view:'form',secs:120,timer:null};
+function show(n){['1','2'].forEach(i=>{$('#s'+i).classList.toggle('on',i==n);$('#t'+i).setAttribute('aria-selected',i==n)});if(n==2)renderDesk()}
+$('#t1').onclick=()=>show(1);$('#t2').onclick=()=>show(2);
+function chipBtn(t){return `<button class="chip" aria-pressed="${state.tr===t}" data-tr="${t}">${t}</button>`}
+function renderPhone(){
+const p=$('#phone');
+const head=`<div class="brand"><div class="logo" aria-hidden="true">☺</div>HappySmile</div>`;
+if(state.view==='form'){
+p.innerHTML=head+`<h2>Hear back in 2 minutes, not 4 hours.</h2><p>Tell us what you need, then pick how you want us to reach you.</p>
+<label class="f">Your name<input class="in" id="nm" value="${state.name}" autocomplete="given-name"></label>
+<label class="f">Mobile number<input class="in" id="ph" value="${state.phone}" inputmode="tel" autocomplete="tel"></label>
+<div><div style="font-size:13px;font-weight:600;margin-bottom:6px">What are you looking for?</div><div class="chips">${['Braces','Whitening','Implants','Not sure'].map(chipBtn).join('')}</div></div>
+<div class="err" id="er" role="alert"></div>
+<div style="display:flex;flex-direction:column;gap:10px"><button class="btn p" id="bc">Call me</button><button class="btn s" id="bw">WhatsApp me</button></div>
+<div class="note">Each button is permission for <b>that channel only</b>. The first call comes from HappySmile's <b>AI assistant</b> and it will say so. A person takes over whenever you ask. Reply STOP to opt out.</div>`;
+p.querySelectorAll('[data-tr]').forEach(b=>b.onclick=()=>{state.tr=b.dataset.tr;sync();renderPhone()});
+$('#bc').onclick=()=>go('call');$('#bw').onclick=()=>go('wa');
+} else if(state.view==='call'){
+p.innerHTML=head+`<h2>Thanks, ${state.name}. Your call is on its way.</h2><p>HappySmile's AI assistant will call ${state.phone} about <b>${state.tr.toLowerCase()}</b>.</p>
+<div style="text-align:center"><div style="font-size:12px;color:var(--mut)">Calling in about</div><div class="big" id="cd">2:00</div></div>
+<div class="steps"><div class="step done"><span class="dot">✓</span><span>WhatsApp note sent: "Hi ${state.name}, we'll call you in 2 minutes."</span></div><div class="step now" id="st2"><span class="dot">2</span><span>AI assistant calls you. It says it is an AI, asks 3 quick questions (treatment, city, timing).</span></div><div class="step" id="st3"><span class="dot">3</span><span>It books a visit, or a clinic team member takes over.</span></div></div>
+<div class="note">Can't talk now? Reply <b>LATER</b> on WhatsApp and we'll pick a time. Reply <b>STOP</b> to opt out.</div>
+<button class="link" id="sw">Use WhatsApp instead</button><button class="link" id="bk">← Edit my details</button>
+<button class="btn p" id="see">See what the clinic sees →</button>`;
+$('#sw').onclick=()=>go('wa');$('#bk').onclick=()=>{clearInterval(state.timer);state.view='form';renderPhone()};$('#see').onclick=()=>show(2);
+clearInterval(state.timer);state.secs=120;state.timer=setInterval(()=>{state.secs--;const c=$('#cd');if(!c){clearInterval(state.timer);return}const s=Math.max(0,state.secs);c.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');if(state.secs<=0){clearInterval(state.timer);c.textContent='Calling…';$('#st2').classList.add('done')}},1000);
+} else {
+p.innerHTML=head+`<h2>We've messaged you on WhatsApp.</h2><p>No call. Reply there whenever suits you.</p>
+<div class="wa"><div class="bub"><b>HappySmile</b><br>Hi ${state.name}, this is HappySmile's AI assistant. You asked about <b>${state.tr.toLowerCase()}</b>. I can answer questions and book a visit. Starting-from prices are shared once you pick a clinic. A team member can join any time.<small>10:42</small></div>
+<div class="opts"><button class="opt">Book a visit</button><button class="opt">Ask a question</button><button class="opt">Talk to a person</button></div></div>
+<div class="note">You chose WhatsApp, so we will not call you. Reply STOP to opt out.</div>
+<button class="link" id="sw">Call me instead</button><button class="link" id="bk">← Edit my details</button>
+<button class="btn p" id="see">See what the clinic sees →</button>`;
+$('#sw').onclick=()=>go('call');$('#bk').onclick=()=>{state.view='form';renderPhone()};$('#see').onclick=()=>show(2);
+}}
+function sync(){const n=$('#nm'),h=$('#ph');if(n)state.name=n.value.trim()||state.name;if(h)state.phone=h.value}
+function go(v){sync();const ok=/\d{8,}/.test((state.phone||'').replace(/\D/g,''));if(!ok){$('#er').textContent='Please enter a valid mobile number.';return}state.view=v;renderPhone()}
+/* ---------- desk ---------- */
+const D={paused:false,sel:0,credit:14,leads:[
+{n:'Priya',t:'Braces',kind:'hot',secs:228,call:'2:41',free:'Thursday or Friday evening',want:'braces for herself, thinking of starting this month',worry:'total cost and treatment time',cons:'Call',tx:['AI: Hi Priya, I\'m HappySmile\'s AI assistant. Is now a good time?','Priya: Yes, I want to know the cost of braces.','AI: Braces start from [clinic-approved price]. The final cost is set at the consultation.']},
+{n:'Rohit',t:'Implants',kind:'hot',secs:270,call:'3:05',free:'This Saturday morning',want:'one implant, has a missing molar',worry:'pain and recovery time',cons:'Call',tx:['AI: Hi Rohit, I\'m HappySmile\'s AI assistant.','Rohit: I need an implant, how long does it take?','AI: The dentist decides after examining you. I can book a consultation for Saturday.']},
+{n:'Neha',t:'Whitening',kind:'booked',call:'1:58',free:'Booked Thu 6pm',want:'teeth whitening before a wedding',worry:'none raised',cons:'WhatsApp',tx:['AI: Hi Neha, I\'m HappySmile\'s AI assistant.','Neha: Can I come Thursday evening?','AI: Booked: Thursday 6pm. You will get a reminder on WhatsApp.']},
+{n:'Imran',t:'Not sure',kind:'missed',call:'0:00',free:'Unknown',want:'not known, call not answered',worry:'unknown',cons:'Call',tx:['AI: Call not answered. One WhatsApp sent. No more retries unless Imran replies.']}]};
+const tag=l=>l.state==='taken'?['Taken over','ok']:l.state==='booked2'?['Booked','ok']:l.state==='auto'?['Link sent','gr']:l.kind==='hot'?['Accept in '+Math.floor(l.secs/60)+':'+String(l.secs%60).padStart(2,'0'),'hot']:l.kind==='booked'?['Booked Thu 6pm','ok']:['Missed','gr'];
+const sub=l=>({taken:'You are on this lead. AI paused.',booked2:'Booked by you',auto:'Nobody accepted in 5 min: WhatsApp booking link sent',hot:'Hot · AI call finished',booked:'AI booked, no action needed',missed:'One WhatsApp sent, no more retries'})[l.state||l.kind];
+function renderDesk(){
+const k=D.leads.filter(l=>l.kind==='hot'&&!l.state&&l.secs>0).length;const l=D.leads[D.sel];const st=l.state||l.kind;
+$('#desk').innerHTML=`<div class="top"><div style="display:flex;align-items:center;gap:12px"><div class="logo" aria-hidden="true">☺</div><b style="font-size:17px">HappySmile · Front desk</b><span style="font-size:13px;color:var(--mut)">Clinic: Jaipur · Meera</span></div><div style="display:flex;align-items:center;gap:14px"><span style="font-size:13px;color:var(--mut)">AI assistant: <b style="color:${D.paused?'#8E3220':'#0A5A4D'}">${D.paused?'Paused':'On'}</b></span><button class="pause" id="pz" aria-pressed="${D.paused}">${D.paused?'Resume AI for this clinic':'Pause AI for this clinic'}</button></div></div>
+${D.paused?'<div class="banner" role="status">AI is paused for this clinic. New enquiries go straight to your team, as before.</div>':''}
+<div class="kpis"><div class="kpi"><div class="l">Hot leads waiting</div><div class="v">${k}</div></div><div class="kpi"><div class="l">Accept within</div><div class="v">5 min</div></div><div class="kpi" style="flex:2"><div class="l">If nobody accepts in 5 minutes</div><div style="font-size:15px;font-weight:600;margin-top:6px">The patient automatically gets a WhatsApp link to book a slot herself.</div></div><div class="kpi"><div class="l">Booked by you this week</div><div class="v">${D.credit}</div></div></div>
+<div class="body"><div class="list" role="tablist" aria-label="Enquiries"><div style="padding:10px 12px;font-size:13px;font-weight:700;color:var(--mut)">Today's enquiries</div>${D.leads.map((x,i)=>{const [a,c]=tag(x);return `<button class="lead" role="tab" aria-selected="${i===D.sel}" data-i="${i}"><span class="r"><span>${x.n} · ${x.t}</span><span class="tag ${c}">${a}</span></span><span class="m">${sub(x)}</span></button>`}).join('')}</div>
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:22px;font-weight:800">${l.n} · ${l.t}</div><div style="font-size:13px;color:var(--mut);margin-top:4px">Call ${l.call} · AI said it was an AI · consented to <b>${l.cons}</b> only</div></div><span class="tag" style="background:${st==='hot'?'#FBE8E3':'#E6F1EE'};color:${st==='hot'?'#8E3220':'#0A5A4D'};border-radius:99px;padding:6px 12px;font-size:12px">${({hot:'HOT',booked:'BOOKED',missed:'MISSED',taken:'YOURS',booked2:'BOOKED',auto:'LINK SENT'})[st]}</span></div>
+<div class="sum"><h4>Summary card</h4><div><b>Wants:</b> ${l.want}.</div><div><b>Worried about:</b> ${l.worry}.</div><div><b>Free:</b> ${l.free}.</div><div><b>Quoted:</b> "Starting from [clinic-approved price]", final cost after consultation.</div><div><b>AI did not:</b> give clinical advice or promise a result.</div></div>
+<div class="tx">${l.tx.map(t=>{const i=t.indexOf(':');return `<div><b>${t.slice(0,i)}:</b>${t.slice(i+1)}</div>`}).join('')}</div>
+${st==='taken'?'<div class="status info" role="status">You are on this lead. AI is paused for '+l.n+'. This booking will be credited to you.</div>':''}${st==='auto'?'<div class="status warn" role="status">Not accepted in 5 minutes. The patient was sent a WhatsApp link to book a slot herself. Still your lead to follow up.</div>':''}${st==='booked2'?'<div class="status info" role="status">Booked and credited to you.</div>':''}
+<div class="row">${(st==='hot'||st==='auto')?`<button class="b2 p" data-a="take">Take over · call ${l.n}</button>`:''}${(st==='hot'||st==='taken'||st==='auto')?`<button class="b2" data-a="book">Book ${l.free.includes('Sat')?'Saturday':'Thu 6pm'}</button>`:''}${(st==='hot'||st==='auto')?`<button class="b2 d" data-a="pz1">Pause AI for ${l.n}</button>`:''}</div>
+<div class="foot">Every booking you close is credited to you. The AI only makes the first call; the consultation is always with your team.</div></div></div>`;
+$('#pz').onclick=()=>{D.paused=!D.paused;renderDesk()};
+document.querySelectorAll('.lead').forEach(b=>b.onclick=()=>{D.sel=+b.dataset.i;renderDesk()});
+document.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;if(a==='take')l.state='taken';if(a==='book'){if(l.state!=='booked2'){D.credit++}l.state='booked2'}if(a==='pz1'){l.state='taken';l.paused=1}renderDesk()});
+}
+setInterval(()=>{let ch=false;D.leads.forEach(l=>{if(l.kind==='hot'&&!l.state&&l.secs>0){l.secs--;if(l.secs<=0){l.state='auto'}ch=true}});if(ch&&$('#s2').classList.contains('on')){const t=document.querySelectorAll('.lead .tag');D.leads.forEach((l,i)=>{if(!t[i])return;const [a,c]=tag(l);t[i].textContent=a;t[i].className='tag '+c});if(D.leads.some(l=>l.state==='auto'&&!l._r)){D.leads.forEach(l=>{if(l.state==='auto')l._r=1});renderDesk()}}},1000);
+renderPhone();
+</script></body></html>
